@@ -4,7 +4,6 @@ function isEmpty(testString) {
 }
 
 // Business Logic
-
 function wordCounter(text) {
   if (isEmpty(text)) {
     return 0;
@@ -20,13 +19,13 @@ function wordCounter(text) {
 }
 
 function numberOfOccurrencesInText(word, text) {
-  if (isEmpty(word)) {
+  if (isEmpty(word) || isEmpty(text)) {
     return 0;
   }
   const textArray = text.split(" ");
   let wordCount = 0;
   textArray.forEach(function(element) {
-    if (element.toLowerCase().includes(word.toLowerCase())) {
+    if (word.toLowerCase() === element.toLowerCase()) {
       wordCount++;
     }
   });
@@ -35,36 +34,23 @@ function numberOfOccurrencesInText(word, text) {
 
 function listWordByFrequency(text) {
   if (isEmpty(text)) {
-    return null;
+    return [];
   }
-  ;
-  let textArray = text.split(" ");
-  console.log(textArray);
-  let wordFrequency = 0;
-  textArray.forEach(function(element, index) {
-    if (word === element) {
-      wordFrequency++;
-      console.log(wordFrequency);
-      return wordFrequency;
-    }
-  })
+  let textArray = text.toLowerCase().split(" ");
+  const frequencies = {};
+
+  textArray.forEach(function(word) {
+    frequencies[word] = numberOfOccurrencesInText(word, text);
+  });
+  return Object.entries(frequencies).sort(function(a, b) {
+    return b[1] - a[1];
+  });
 }
 
-// if (isEmpty(word) || isEmpty(text)) {
-//   return null;
-// }
-// const p = document.createElement("p");
-// let textArray = text.split(" ");
-// textArray.forEach(function(element, index) {
-//   if (word === element) {
-//     const bold = document.createElement("strong");
-//     bold.append(element);
-//     p.append(bold);
-//   } else {
-//     p.append(element);
-//   }
-//   if (index !== (textArray.length - 1)) {
-//     p.append(" ");
+// Object.entries(wordFrequency).forEach(function([key, value]) { //this thing
+//   console.log(key, value);
+
+// });
 
 // UI Logic
 
@@ -84,11 +70,13 @@ function handleFormSubmission() {
     document.querySelector("div#bolded-passage").innerText = null;
   }
   let wordFrequency = listWordByFrequency(passage);
-  if (wordFrequency) {
-    const p = document.createElement("p");
-    p.append(wordFrequency);
-    console.log(p);
-    document.querySelector("div#word-frequency").append(p);
+  if (wordFrequency.length > 0) {
+    const olEle = document.createElement("ol");
+    const liEle = document.createElement("li");
+    
+    liEle.append(JSON.stringify(wordFrequency)); 
+    document.querySelector("div#word-frequency").append(olEle);
+    document.querySelector("ol").append(liEle);
   } else {
     document.querySelector("div#word-frequency").innerText = null;
   }
