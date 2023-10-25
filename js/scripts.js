@@ -4,7 +4,17 @@ function isEmpty(testString) {
 }
 
 function getWordsArray(text) {
-  return text.split(" ");
+  return text
+    .split(/\b/)
+    .map(function (word) {
+      return word.trim().toLowerCase();
+    })
+    .filter(function (word) {
+      if (isEmpty(word)) {
+        return false;
+      }
+      return word.match(/^[a-zA-Z]+$/);
+    });
 }
 
 function isValidWord(word) {
