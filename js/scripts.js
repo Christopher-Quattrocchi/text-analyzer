@@ -94,22 +94,21 @@ function reset() {
   getBoldedPassageDiv().innerText = "";
 }
 
-function handleFormSubmission(event) {
-  reset();
-  event.preventDefault();
-  const passage = getTextPassage();
-  const word = getSearchWord();
+function updateCounts(passage, word) {
   const wordCount = wordCounter(passage);
   const occurrencesOfWord = numberOfOccurrencesInText(word, passage);
   updateWordCount(wordCount);
   updateOccurrencesOfWord(occurrencesOfWord);
+}
 
+function updateBoldedPassage(passage, word) {
   const boldedPassage = boldPassage(word, passage);
   if (boldedPassage) {
     getBoldedPassageDiv().append(boldedPassage);
-  } else {
-    getBoldedPassageDiv().innerText = null;
   }
+}
+
+function updateWordFrequencyList(passage) {
   const wordFrequency = getFrequenciesForText(passage);
   if (wordFrequency.length > 0) {
     const list = document.createElement("ol");
@@ -130,6 +129,16 @@ function handleFormSubmission(event) {
 
     getWordFrequencyDiv().append(list);
   }
+}
+
+function handleFormSubmission(event) {
+  reset();
+  event.preventDefault();
+  const passage = getTextPassage();
+  const word = getSearchWord();
+  updateCounts(passage, word);
+  updateBoldedPassage(passage, word);
+  updateWordFrequencyList(passage);
 }
 
 window.addEventListener("load", function () {
