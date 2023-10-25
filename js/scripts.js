@@ -54,11 +54,11 @@ function listWordByFrequency(text) {
 // UI Logic
 
 function getTextPassage() {
-  return document.getElementById("text-passage").value;
+  return document.getElementById("text-passage").value.trim();
 }
 
 function getSearchWord() {
-  return document.getElementById("word").value;
+  return document.getElementById("word").value.trim();
 }
 
 function updateWordCount(newCount) {
