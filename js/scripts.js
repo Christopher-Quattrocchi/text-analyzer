@@ -36,7 +36,7 @@ function numberOfOccurrencesInText(word, text) {
   return wordCount;
 }
 
-function listWordByFrequency(text) {
+function getFrequenciesForText(text) {
   if (isEmpty(text)) {
     return [];
   }
@@ -98,7 +98,7 @@ function handleFormSubmission(event) {
   } else {
     getBoldedPassageDiv().innerText = null;
   }
-  let wordFrequency = listWordByFrequency(passage);
+  let wordFrequency = getFrequenciesForText(passage);
   if (wordFrequency.length > 0) {
     const olEle = document.createElement("ol");
 
