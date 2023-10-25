@@ -51,11 +51,7 @@ function listWordByFrequency(text) {
   });
 }
 
-// Object.entries(wordFrequency).forEach(function([key, value]) { //this thing
-//   console.log(key, value);
-
 // UI Logic
-
 function handleFormSubmission() {
   event.preventDefault();
   const passage = document.getElementById("text-passage").value;
@@ -137,24 +133,3 @@ function boldPassage(word, text) {
 
   return p;
 }
-
-// function boldPassage(word, text) {
-//   if (isEmpty(word) || isEmpty(text)) {
-//     return null;
-//   }
-//   const p = document.createElement("p");
-//   let textArray = getWordsArray(text);
-//   textArray.forEach(function(element, index) {
-//     if (word === element) {
-//       const bold = document.createElement("strong");
-//       bold.append(element);
-//       p.append(bold);
-//     } else {
-//       p.append(element);
-//     }
-//     if (index !== (textArray.length - 1)) {
-//       p.append(" ");
-//     }
-//   });
-//   return p;
-// }
