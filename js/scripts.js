@@ -25,9 +25,9 @@ function wordCounter(text) {
     return 0;
   }
   let wordCount = 0;
-  const textArray = getWordsArray(text);
-  textArray.forEach(function (element) {
-    if (isValidWord(element)) {
+  const words = getWordsArray(text);
+  words.forEach(function (word) {
+    if (isValidWord(word)) {
       wordCount++;
     }
   });
