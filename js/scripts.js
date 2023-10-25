@@ -52,20 +52,45 @@ function listWordByFrequency(text) {
 }
 
 // UI Logic
+
+function getTextPassage() {
+  return document.getElementById("text-passage").value;
+}
+
+function getSearchWord() {
+  return document.getElementById("word").value;
+}
+
+function updateWordCount(newCount) {
+  document.getElementById("total-count").innerText = newCount;
+}
+
+function updateOccurrencesOfWord(count) {
+  document.getElementById("selected-count").innerText = count;
+}
+
+function getBoldedPassageDiv() {
+  return document.getElementById("bolded-passage");
+}
+
+function getWordFrequencyDiv() {
+  return document.getElementById("word-frequency");
+}
+
 function handleFormSubmission(event) {
   event.preventDefault();
-  const passage = document.getElementById("text-passage").value;
-  const word = document.getElementById("word").value;
+  const passage = getTextPassage();
+  const word = getSearchWord();
   const wordCount = wordCounter(passage);
   const occurrencesOfWord = numberOfOccurrencesInText(word, passage);
-  document.getElementById("total-count").innerText = wordCount;
-  document.getElementById("selected-count").innerText = occurrencesOfWord;
+  updateWordCount(wordCount);
+  updateOccurrencesOfWord(occurrencesOfWord);
 
   let boldedPassage = boldPassage(word, passage);
   if (boldedPassage) {
-    document.querySelector("div#bolded-passage").append(boldedPassage);
+    getBoldedPassageDiv().append(boldedPassage);
   } else {
-    document.querySelector("div#bolded-passage").innerText = null;
+    getBoldedPassageDiv().innerText = null;
   }
   let wordFrequency = listWordByFrequency(passage);
   if (wordFrequency.length > 0) {
@@ -78,13 +103,11 @@ function handleFormSubmission(event) {
       olEle.append(liEle);
     });
 
-    // liEle.append(JSON.stringify(wordFrequency)); //No longer necessary but good to know
-
     //clears previous result
-    document.querySelector("div#word-frequency").innerHTML = "";
-    document.querySelector("div#word-frequency").append(olEle);
+    getWordFrequencyDiv().innerHTML = "";
+    getWordFrequencyDiv().append(olEle);
   } else {
-    document.querySelector("div#word-frequency").innerText = null;
+    getWordFrequencyDiv().innerText = null;
   }
 }
 
