@@ -72,11 +72,16 @@ function handleFormSubmission() {
   let wordFrequency = listWordByFrequency(passage);
   if (wordFrequency.length > 0) {
     const olEle = document.createElement("ol");
-    const liEle = document.createElement("li");
+   
+    wordFrequency.forEach(function(pair) {
+      const liEle = document.createElement("li");
+      liEle.textContent = "The word " + pair[0] + " appears " + pair[1] + " times.";
+      olEle.append(liEle);
+    })
     
-    liEle.append(JSON.stringify(wordFrequency)); 
+    // liEle.append(JSON.stringify(wordFrequency)); 
+    document.querySelector("div#word-frequency").innerHTML = "";
     document.querySelector("div#word-frequency").append(olEle);
-    document.querySelector("ol").append(liEle);
   } else {
     document.querySelector("div#word-frequency").innerText = null;
   }
