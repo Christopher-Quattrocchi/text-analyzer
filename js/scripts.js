@@ -40,7 +40,7 @@ function getFrequenciesForText(text) {
   if (isEmpty(text)) {
     return [];
   }
-  let textArray = text.toLowerCase().split(" ");
+  const textArray = text.toLowerCase().split(" ");
   const frequencies = {};
 
   textArray.forEach(function (word) {
@@ -92,13 +92,13 @@ function handleFormSubmission(event) {
   updateWordCount(wordCount);
   updateOccurrencesOfWord(occurrencesOfWord);
 
-  let boldedPassage = boldPassage(word, passage);
+  const boldedPassage = boldPassage(word, passage);
   if (boldedPassage) {
     getBoldedPassageDiv().append(boldedPassage);
   } else {
     getBoldedPassageDiv().innerText = null;
   }
-  let wordFrequency = getFrequenciesForText(passage);
+  const wordFrequency = getFrequenciesForText(passage);
   if (wordFrequency.length > 0) {
     const olEle = document.createElement("ol");
 
