@@ -1,6 +1,10 @@
 // Utility Logic
 function isEmpty(testString) {
-  return (testString.trim().length === 0);
+  return testString.trim().length === 0;
+}
+
+function getWordsArray(text) {
+  return text.split(" ");
 }
 
 // Business Logic
@@ -9,8 +13,8 @@ function wordCounter(text) {
     return 0;
   }
   let wordCount = 0;
-  const textArray = text.split(" ");
-  textArray.forEach(function(element) {
+  const textArray = getWordsArray(text);
+  textArray.forEach(function (element) {
     if (!Number(element) && !(element === "zoinks")) {
       wordCount++;
     }
@@ -22,9 +26,9 @@ function numberOfOccurrencesInText(word, text) {
   if (isEmpty(word) || isEmpty(text)) {
     return 0;
   }
-  const textArray = text.split(" ");
+  const textArray = getWordsArray(text);
   let wordCount = 0;
-  textArray.forEach(function(element) {
+  textArray.forEach(function (element) {
     if (word.toLowerCase() === element.toLowerCase()) {
       wordCount++;
     }
@@ -39,10 +43,10 @@ function listWordByFrequency(text) {
   let textArray = text.toLowerCase().split(" ");
   const frequencies = {};
 
-  textArray.forEach(function(word) {
+  textArray.forEach(function (word) {
     frequencies[word] = numberOfOccurrencesInText(word, text);
   });
-  return Object.entries(frequencies).sort(function(a, b) {
+  return Object.entries(frequencies).sort(function (a, b) {
     return b[1] - a[1]; //the number refers to index. the first index is the word, second is the frequency. In this case, we want to specify that frequency is the thing being compared, otherwise this would sort by alphabetical (I think)
   });
 }
@@ -70,13 +74,14 @@ function handleFormSubmission() {
   let wordFrequency = listWordByFrequency(passage);
   if (wordFrequency.length > 0) {
     const olEle = document.createElement("ol");
-   
-    wordFrequency.forEach(function(pair) {
+
+    wordFrequency.forEach(function (pair) {
       const liEle = document.createElement("li");
-      liEle.textContent = "The word '" + pair[0] + "' appears " + pair[1] + " times.";
+      liEle.textContent =
+        "The word '" + pair[0] + "' appears " + pair[1] + " times.";
       olEle.append(liEle);
-    })
-    
+    });
+
     // liEle.append(JSON.stringify(wordFrequency)); //No longer necessary but good to know
 
     //clears previous result
@@ -87,8 +92,10 @@ function handleFormSubmission() {
   }
 }
 
-window.addEventListener("load", function() {
-  document.querySelector("form#word-counter").addEventListener("submit", handleFormSubmission);
+window.addEventListener("load", function () {
+  document
+    .querySelector("form#word-counter")
+    .addEventListener("submit", handleFormSubmission);
 });
 
 function boldPassage(word, text) {
@@ -97,9 +104,9 @@ function boldPassage(word, text) {
   }
 
   const p = document.createElement("p");
-  let textArray = text.split(" ");
+  let textArray = getWordsArray(text);
 
-  textArray.forEach(function(element, index) {
+  textArray.forEach(function (element, index) {
     //check if element contains word as a substring
     if (element.includes(word)) {
       //split element by target word
@@ -123,7 +130,7 @@ function boldPassage(word, text) {
       p.append(element);
     }
     //adds a space after every word, unless it is the last word in the string
-    if (index !== (textArray.length - 1)) {
+    if (index !== textArray.length - 1) {
       p.append(" ");
     }
   });
@@ -136,7 +143,7 @@ function boldPassage(word, text) {
 //     return null;
 //   }
 //   const p = document.createElement("p");
-//   let textArray = text.split(" ");
+//   let textArray = getWordsArray(text);
 //   textArray.forEach(function(element, index) {
 //     if (word === element) {
 //       const bold = document.createElement("strong");
