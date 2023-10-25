@@ -153,6 +153,6 @@ function handleFormSubmission(event) {
 
 window.addEventListener("load", function () {
   document
-    .querySelector("form#word-counter")
+    .getElementById("word-counter")
     .addEventListener("submit", handleFormSubmission);
 });
