@@ -40,10 +40,10 @@ function getFrequenciesForText(text) {
   if (isEmpty(text)) {
     return [];
   }
-  const textArray = text.toLowerCase().split(" ");
+  const words = getWordsArray(text);
   const frequencies = {};
 
-  textArray.forEach(function (word) {
+  words.forEach(function (word) {
     frequencies[word] = numberOfOccurrencesInText(word, text);
   });
   return Object.entries(frequencies).sort(function (a, b) {
