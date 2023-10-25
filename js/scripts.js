@@ -112,16 +112,23 @@ function handleFormSubmission(event) {
   }
   const wordFrequency = getFrequenciesForText(passage);
   if (wordFrequency.length > 0) {
-    const olEle = document.createElement("ol");
+    const list = document.createElement("ol");
 
     wordFrequency.forEach(function (pair) {
-      const liEle = document.createElement("li");
-      liEle.textContent =
-        "The word '" + pair[0] + "' appears " + pair[1] + " times.";
-      olEle.append(liEle);
+      const listItem = document.createElement("li");
+      const word = pair[0];
+      const count = pair[1];
+      let timeString = "time";
+
+      if (count > 1) {
+        timeString = "times";
+      }
+
+      listItem.textContent = `The word '${word}' appears ${count} ${timeString}.`;
+      list.append(listItem);
     });
 
-    getWordFrequencyDiv().append(olEle);
+    getWordFrequencyDiv().append(list);
   }
 }
 
