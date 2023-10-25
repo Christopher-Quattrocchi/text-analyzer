@@ -7,6 +7,18 @@ function getWordsArray(text) {
   return text.split(" ");
 }
 
+function isValidWord(word) {
+  if (["zoinks", "muppeteer", "biffaroni", "loopdaloop"].includes(word)) {
+    return false;
+  }
+
+  if (Number(word)) {
+    return false;
+  }
+
+  return true;
+}
+
 // Business Logic
 function wordCounter(text) {
   if (isEmpty(text)) {
@@ -15,7 +27,7 @@ function wordCounter(text) {
   let wordCount = 0;
   const textArray = getWordsArray(text);
   textArray.forEach(function (element) {
-    if (!Number(element) && !(element === "zoinks")) {
+    if (isValidWord(element)) {
       wordCount++;
     }
   });
