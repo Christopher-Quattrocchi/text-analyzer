@@ -78,6 +78,8 @@ function handleFormSubmission() {
     })
     
     // liEle.append(JSON.stringify(wordFrequency)); //No longer necessary but good to know
+
+    //clears previous result
     document.querySelector("div#word-frequency").innerHTML = "";
     document.querySelector("div#word-frequency").append(olEle);
   } else {
