@@ -101,6 +101,16 @@ function updateCounts(passage, word) {
   updateOccurrencesOfWord(occurrencesOfWord);
 }
 
+function boldPassage(word, text) {
+  if (isEmpty(word) || isEmpty(text)) {
+    return null;
+  }
+
+  const p = document.createElement("p");
+  p.innerHTML = text.replaceAll(word, `<strong>${word}</strong>`);
+  return p;
+}
+
 function updateBoldedPassage(passage, word) {
   const boldedPassage = boldPassage(word, passage);
   if (boldedPassage) {
@@ -139,16 +149,6 @@ function handleFormSubmission(event) {
   updateCounts(passage, word);
   updateBoldedPassage(passage, word);
   updateWordFrequencyList(passage);
-}
-
-function boldPassage(word, text) {
-  if (isEmpty(word) || isEmpty(text)) {
-    return null;
-  }
-
-  const p = document.createElement("p");
-  p.innerHTML = text.replaceAll(word, `<strong>${word}</strong>`);
-  return p;
 }
 
 window.addEventListener("load", function () {
