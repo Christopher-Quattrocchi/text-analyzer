@@ -98,22 +98,29 @@ function boldPassage(word, text) {
   let textArray = text.split(" ");
 
   textArray.forEach(function(element, index) {
-
+    //check if element contains word as a substring
     if (element.includes(word)) {
-
+      //split element by target word
       let parts = element.split(word);
+      //check if first part of the array created with split is empty or not
       if (parts[0]) {
+        //if not, append it
         p.append(parts[0]);
       }
       const bold = document.createElement("strong");
+      //since we know that this string contains word, we can safely append it
       bold.append(word);
       p.append(bold);
+      //check is second part of the array is empty
       if (parts[1]) {
+        //if not empty, we can append it
         p.append(parts[1]);
       }
     } else {
+      //if the element doesn't contain word, this happens
       p.append(element);
     }
+    //adds a space after every word, unless it is the last word in the string
     if (index !== (textArray.length - 1)) {
       p.append(" ");
     }
