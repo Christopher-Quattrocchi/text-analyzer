@@ -62,7 +62,7 @@ function getFrequenciesForText(text) {
   if (isEmpty(text)) {
     return [];
   }
-  const words = getWordsArray(text);
+  const words = [...new Set(getWordsArray(text))];
   const frequencies = {};
 
   words.forEach(function (word) {
