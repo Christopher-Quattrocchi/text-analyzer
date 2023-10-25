@@ -48,68 +48,7 @@ function getWordFrequencies(text) {
     });
   const uniqueWords = [...new Set(words)];
 
-  const fOf course, let's break down the `getWordFrequencies` function step by step.
-
-**Function Purpose:**
-The function `getWordFrequencies` takes a string `text` as its argument and returns an array of arrays. Each sub-array contains a word and its frequency in the text.
-
-**Detailed Breakdown:**
-
-1. **Check for Empty Input:**
-   ```javascript
-   if (isEmpty(text)) {
-      return [];
-   }
-   ```
-   If the provided text is empty (determined by the `isEmpty` function), the function returns an empty array. This is useful as it ensures the function always returns an array, regardless of whether the input is valid.
-
-2. **Split the Text into Words:**
-   ```javascript
-   const words = text
-      .split(' ')
-      .map(function (word) {
-        return word.trim();
-      });
-   ```
-   The text is split into individual words using `split(' ')`, resulting in an array of words. The `map` function then loops through each word, trims any extra spaces or line breaks, and returns the cleaned-up word.
-
-3. **Get Unique Words:**
-   ```javascript
-   const uniqueWords = [...new Set(words)];
-   ```
-   A new `Set` is used to filter out duplicate words. This results in an array `uniqueWords` containing only unique words from the text. Since a Set inherently contains unique values, spreading it into an array ensures duplicates are removed.
-
-4. **Calculate Frequencies:**
-   ```javascript
-   const frequencies = [];
-   
-   let previousFrequency = 0;
-   uniqueWords.forEach(function (word) {
-     const frequency = numberOfOccurrencesInText(word, text);
-     const wordAndFrequency = [word, frequency];
-   ```
-   An empty array `frequencies` is initialized to store the word-frequency pairs. 
-   The function then loops through each unique word, calculates its frequency in the text using the `numberOfOccurrencesInText` function, and creates a sub-array `wordAndFrequency` containing the word and its frequency.
-
-5. **Sort as You Go:**
-   ```javascript
-   if (frequency > previousFrequency) {
-      frequencies.unshift(wordAndFrequency);
-   } else {
-      frequencies.push(wordAndFrequency);
-   }
-   previousFrequency = frequency;
-   ```
-   The function attempts to keep the `frequencies` array sorted based on word frequency. If the current word's frequency is greater than the previous word's frequency, it's added to the beginning of the `frequencies` array using `unshift`. Otherwise, it's added to the end using `push`. The variable `previousFrequency` keeps track of the last processed word's frequency.
-
-6. **Return the Result:**
-   ```javascript
-   return frequencies;
-   ```
-   Finally, the function returns the `frequencies` array containing word-frequency pairs.
-
-**Note:**
-The "sort as you go" approach doesn't guarantee a fully sorted `frequencies` array. If the unique words in the text aren't processed in descending order of their frequencies, the result might not be sorted. If you need a fully sorted list, you might want to use a separate sorting step after calculating all frequencies.requencies = [];
+  const frequencies = [];
 
   let previousFrequency = 0;
   uniqueWords.forEach(function (word) {
