@@ -116,8 +116,12 @@ function boldPassage(word, text) {
     return null;
   }
 
+  const searchRegex = new RegExp(`(${word})`, "gi");
   const p = document.createElement("p");
-  p.innerHTML = text.replaceAll(word, `<strong>${word}</strong>`);
+  p.innerHTML = text.replace(
+    searchRegex,
+    (match) => `<strong>${match}</strong>`,
+  );
   return p;
 }
 
