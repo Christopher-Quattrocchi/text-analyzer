@@ -77,7 +77,13 @@ function getWordFrequencyDiv() {
   return document.getElementById("word-frequency");
 }
 
+function reset() {
+  getWordFrequencyDiv().innerText = "";
+  getBoldedPassageDiv().innerText = "";
+}
+
 function handleFormSubmission(event) {
+  reset();
   event.preventDefault();
   const passage = getTextPassage();
   const word = getSearchWord();
@@ -103,11 +109,7 @@ function handleFormSubmission(event) {
       olEle.append(liEle);
     });
 
-    //clears previous result
-    getWordFrequencyDiv().innerHTML = "";
     getWordFrequencyDiv().append(olEle);
-  } else {
-    getWordFrequencyDiv().innerText = null;
   }
 }
 
