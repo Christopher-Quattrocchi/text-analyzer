@@ -52,7 +52,7 @@ function listWordByFrequency(text) {
 }
 
 // UI Logic
-function handleFormSubmission() {
+function handleFormSubmission(event) {
   event.preventDefault();
   const passage = document.getElementById("text-passage").value;
   const word = document.getElementById("word").value;
